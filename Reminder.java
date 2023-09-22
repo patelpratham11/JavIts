@@ -30,4 +30,12 @@ public class Reminder {
     public void increaseStreak(){
         this.streak += 1; 
     }
+
+    public String toString(){
+        return this.reminder+","+this.difficulty+","+this.negative+","+this.streak;
+    }
+
+    public String printString(){
+        return this.reminder+"\t\t"+this.difficulty+"\t\t"+this.negative+"\t\t"+this.streak;
+    }
 }

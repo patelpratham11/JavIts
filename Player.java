@@ -44,21 +44,18 @@ public class Player{
 
     public int addXP(float xp){
         this.xp += xp;
-        this.write();
         return this.getLevel();
     }
 
     public void addStrength(double strength){
         this.strength += strength;
-        this.write();
     }
 
     public void setBalance(float balance){
         this.balance = balance;
-        this.write();
     }
 
-    private void write(){
+    public void write(){
         try {
             FileWriter myWriter = new FileWriter(this.fileString);
             myWriter.write(this.name+","+this.xp+","+this.strength+","+this.balance);
