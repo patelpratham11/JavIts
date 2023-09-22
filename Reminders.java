@@ -34,6 +34,10 @@ public class Reminders {
         this.remindersList.add(reminder);
     }
 
+    public void update(Reminder reminder){
+
+    }
+
     public void write(){
        try {
             FileWriter myWriter = new FileWriter(this.fileString);
@@ -49,9 +53,10 @@ public class Reminders {
 
     public void print(){
         System.out.println("_________________________________________________________________");
-        System.out.printf("| %-15s | %-15s | %-12s | %-10s |%n", "NAME", "DIFFICULTY", "ISNEGATIVE", "STREAK");
-        for(Reminder r : remindersList){
-            System.out.printf("| %-15s | %-15s | %-12s | %-10s |%n", r.getReminder(), r.getDifficulty(), r.getNegative(), r.getStreak());
+        System.out.printf("| %-2s | %-15s | %-15s | %-12s | %-10s |%n", "NAME", "DIFFICULTY", "ISNEGATIVE", "STREAK");
+        for(int i = 1; i <= remindersList.size(); i++){
+            Reminder r = remindersList.get(i);
+            System.out.printf("| %-2s | %-15s | %-15s | %-12s | %-10s |%n", i, r.getReminder(), r.getDifficulty(), r.getNegative(), r.getStreak());
         }
         System.out.println("_________________________________________________________________");
     }
