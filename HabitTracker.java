@@ -65,7 +65,15 @@ public class HabitTracker {
     }
 
     public static void addPomodoros(){
-        
+        System.out.println("Please enter the following information in the following format:\n<# Pomos>;<# Hard>;<# Medium>;<# Easy>");
+        input.nextLine();
+        String [] data = input.nextLine().split(";");
+        pomoList.addPomos(Integer.parseInt(data[0]));
+        pomoList.addHards(Integer.parseInt(data[1]));
+        pomoList.addMeds(Integer.parseInt(data[2]));
+        pomoList.addEasy(Integer.parseInt(data[3]));
+
+        balanceCalc(pomoList.calculate());
     }
 
     public static void remindersMenu(){
@@ -103,15 +111,17 @@ public class HabitTracker {
     }
 
     public static void addNewReminder(){
-        System.out.println("Please enter the reminder's information in the following format:\n<Name>:<Difficulty>:<Neg>");
+        System.out.println("Please enter the reminder's information in the following format:\n<Name>;<Difficulty>;<Neg>");
         input.nextLine();
-        String [] data = input.nextLine().split(":");
+        String [] data = input.nextLine().split(";");
         reminders.addReminder(new Reminder(data[0], Integer.parseInt(data[1]), Boolean.parseBoolean(data[2]), 0));
         System.out.println("Added successfully!");
         reminders.print();
     }
+    
     public static void updateReminders(){
         reminders.print();
+        double balance = 0;
         System.out.println("Which reminder would you like to update? If there are multiple, split them with ';'");
         input.nextLine();
         String [] choices = input.nextLine().split(";");
@@ -119,16 +129,28 @@ public class HabitTracker {
             int choice = Integer.parseInt(c);
             Reminder rem = reminders.getReminder(choice);
             if(rem != null){
-                rem.increaseStreak();
+                balance += rem.increaseStreak();
             } else{
                 System.out.println("Invalid Choice!");
             }
         }
-        
+
+        balanceCalc(balance);
     }
 
     public static void shopMenu(){
         
+    }
+
+    public static void balanceCalc(double balance){
+        double damage = player.getStrength() + (balance * Math.random() *7);
+        damage = (double) Math.round(damage * 100) / 100;
+        boss.damage(damage);
+        player.addXP((float)damage);
+        player.addBalance(balance*(player.getLevel()));
+
+        System.out.println("You damaged the boss with "+(double) Math.round(damage * 100) / 100+ " hitpoints");
+        System.out.println("You also earned "+(double) Math.round(balance * 100) / 100+" coins, bringing your balance up to "+ player.getBalance());
     }
 
 }

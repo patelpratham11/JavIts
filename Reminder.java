@@ -27,8 +27,9 @@ public class Reminder {
         return this.negative;
     }
 
-    public void increaseStreak(){
+    public double increaseStreak(){
         this.streak += 1; 
+        return this.streak * 0.05* this.difficulty;
     }
 
     public String toString(){

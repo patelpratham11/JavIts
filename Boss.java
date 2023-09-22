@@ -33,11 +33,12 @@ public class Boss {
     }
 
     public double getHealth(){
-        return this.health;
+        return (double) Math.round(this.health * 100) / 100;
     }
 
     public void damage(double amtDamage){
         this.health -= amtDamage;
+        this.health = (double) Math.round(this.health * 100) / 100;
     }
 
     public boolean isFinished(){

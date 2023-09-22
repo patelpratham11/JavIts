@@ -67,7 +67,7 @@ public class Pomodoro {
 
     public double calculate(){
         double balance = this.pomos*pomoMultiplier + this.hard*hardMultiplier + this.medium*mediumMultiplier + this.easy*easyMultiplier;
-        return balance;
+        return (double) Math.round(balance * 100) / 100;
     }
 
     public void write(){
