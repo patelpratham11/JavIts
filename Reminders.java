@@ -27,21 +27,22 @@ public class Reminders {
     }
 
     public Reminder getReminder(int id){
-        return this.remindersList.get(id);
+        return this.remindersList.get(id-1);
     }
 
     public void addReminder(Reminder reminder){
         this.remindersList.add(reminder);
+        System.out.println(this.remindersList.get(0));
     }
 
-    public void update(Reminder reminder){
-
+    public void update(int id){
+        this.getReminder(id).increaseStreak();
     }
 
     public void write(){
        try {
             FileWriter myWriter = new FileWriter(this.fileString);
-            for( Reminder r : remindersList){
+            for( Reminder r :  this.remindersList){
                 myWriter.write(r.toString());
             }
             myWriter.close();
@@ -52,13 +53,13 @@ public class Reminders {
     }
 
     public void print(){
-        System.out.println("_________________________________________________________________");
-        System.out.printf("| %-2s | %-15s | %-15s | %-12s | %-10s |%n", "NAME", "DIFFICULTY", "ISNEGATIVE", "STREAK");
+        System.out.println("__________________________________________________________________________");
+        System.out.printf("| %-6s | %-15s | %-15s | %-12s | %-10s |%n", "INDEX ","NAME", "DIFFICULTY", "ISNEGATIVE", "STREAK");
         for(int i = 1; i <= remindersList.size(); i++){
-            Reminder r = remindersList.get(i);
-            System.out.printf("| %-2s | %-15s | %-15s | %-12s | %-10s |%n", i, r.getReminder(), r.getDifficulty(), r.getNegative(), r.getStreak());
+            Reminder r = remindersList.get(i-1);
+            System.out.printf("| %-6s | %-15s | %-15s | %-12s | %-10s |%n", i, r.getReminder(), r.getDifficulty(), r.getNegative(), r.getStreak());
         }
-        System.out.println("_________________________________________________________________");
+        System.out.println("__________________________________________________________________________");
     }
 
     

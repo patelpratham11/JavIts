@@ -32,7 +32,7 @@ public class Reminder {
     }
 
     public String toString(){
-        return this.reminder+","+this.difficulty+","+this.negative+","+this.streak;
+        return this.reminder+","+this.difficulty+","+this.negative+","+this.streak+"\n";
     }
 
     public String printString(){
