@@ -6,6 +6,7 @@ public class HabitTracker {
     private static Boss boss;
     private static Reminders reminders; 
     private static Pomodoro pomoList;
+    private static Shop shop;
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -13,6 +14,7 @@ public class HabitTracker {
         boss = new Boss("Resources/Boss.config");
         reminders = new Reminders("Resources/Reminders.config");
         pomoList = new Pomodoro("Resources/Pomos.config");
+        shop = new Shop("Resources/Shop.config");
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
         menu();
@@ -139,7 +141,65 @@ public class HabitTracker {
     }
 
     public static void shopMenu(){
-        
+        System.out.println("What would you like to do?\nEnter the number below.");
+        System.out.println("_________________________________");
+        System.out.printf("| %-25s | %-1s |%n", "Buy Something", 1 );
+        System.out.printf("| %-25s | %-1s |%n", "Add Shop Items", 2 );
+        System.out.printf("| %-25s | %-1s |%n", "Quit", 3 );
+        System.out.println("_________________________________");
+
+        int choice = input.nextInt();
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+        switch (choice){
+            case 1: 
+                shop();
+                shopMenu();
+                break;
+            case 2: 
+                addShop();
+                shopMenu();
+                break;
+            case 3: 
+                return;
+            case 4: 
+            default:
+                System.out.println("Invalid Choice!");
+                shopMenu();
+                break;
+        }
+    }
+
+    public static void shop(){
+        shop.print();
+        System.out.println("What would you like to purchase?");
+        int choice = input.nextInt();
+
+       Item i = shop.getItem(choice);
+        if(i.getCost() < player.getBalance()){
+            player.addBalance(-1*i.getCost());
+            if(i.getValue() == 1){
+                boss.damage(i.getAmt());
+                System.out.println("You attacked the boss by "+i.getAmt());
+                System.out.println("Current boss health is "+boss.getHealth());
+            } else if(i.getValue() == 2) {
+                player.addStrength(i.getAmt());
+                System.out.println("You gained "+i.getAmt()+" strength!");
+                System.out.println("Current strength is "+player.getStrength());
+            } else{
+                System.out.println("You bout "+i.getName()+", Enjoy!");
+            }
+        } else{
+            System.out.println("Sorry, insufficient funds!");
+        }
+    }
+
+    public static void addShop(){
+        System.out.println("Add the item in this fashion:\n<Name>;<Cost>;<Type>;<Amt>");
+        input.nextLine();
+        String [] data = input.nextLine().split(";");
+        shop.putItem(new Item(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3])));
+        System.out.println("Placed successfully!");
     }
 
     public static void balanceCalc(double balance){
