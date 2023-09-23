@@ -13,3 +13,12 @@
 
 ## Issues
 All issues can be submitted via *Github Issues*
+
+## Bug Fixes
+
+- 9/23/23 
+    - v3.0.0 -> v3.0.1
+    - Shop display misaligned
+    - Defeated Boss would award reward more than once
+    - Better display for boss
+    - Fixed random print messages
