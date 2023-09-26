@@ -15,6 +15,9 @@
 All issues can be submitted via *Github Issues*
 
 ## Bug Fixes
+- 9/26/23
+    - v3.0.2 -> v3.1.0
+    - Implemented the monthly reset feature
 - 9/25/23
     - v3.0.1 -> v3.0.2
     - Negative Reminders Doesn't Work -- Fixed
