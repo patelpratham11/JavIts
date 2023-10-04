@@ -15,6 +15,9 @@
 All issues can be submitted via *Github Issues*
 
 ## Bug Fixes
+- 10/3/23
+    - v3.1.0 -> v3.1.1
+    - Cleaned up the player upgrades to be more consistent
 - 9/26/23
     - v3.0.2 -> v3.1.0
     - Implemented the monthly reset feature
